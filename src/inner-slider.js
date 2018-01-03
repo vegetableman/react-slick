@@ -218,7 +218,7 @@ export var InnerSlider = createReactClass({
         onMouseLeave={this.onInnerSliderLeave}
         onMouseOver={this.onInnerSliderOver}
       >
-        {prevArrow}
+        {this.props.disabled ? null : prevArrow}
         <div
           ref={this.listRefHandler}
           className="slick-list"
@@ -233,11 +233,11 @@ export var InnerSlider = createReactClass({
           onTouchCancel={this.state.dragging ? this.swipeEnd : null}
           onKeyDown={this.props.accessibility ? this.keyHandler : null}>
           <Track ref={this.trackRefHandler} {...trackProps}>
-            {this.props.children}
+            {(this.props.disabled ? this.props.children[0] : this.props.children)}
           </Track>
         </div>
-        {nextArrow}
-        {dots}
+        {this.props.disabled ? null : nextArrow}
+        {this.props.disabled ? null: dots}
       </div>
     );
   }
