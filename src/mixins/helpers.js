@@ -43,7 +43,9 @@ var helpers = {
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
-      this.setState({trackStyle: trackStyle});
+      if (!this.props.disabled) {
+        this.setState({trackStyle: trackStyle});
+      }
 
       this.autoPlay(); // once we're set up, trigger the initial autoplay.
     });
