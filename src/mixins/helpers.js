@@ -43,7 +43,7 @@ var helpers = {
       // getCSS function needs previously set state
       var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
-      if (!this.props.disabled) {
+      if (!props.disabled) {
         this.setState({trackStyle: trackStyle});
       }
 
@@ -84,15 +84,16 @@ var helpers = {
       slideHeight,
       listHeight,
     }, function () {
+      if (!props.disabled) {
+        var targetLeft = getTrackLeft(assign({
+          slideIndex: this.state.currentSlide,
+          trackRef: this.track
+        }, props, this.state));
+        // getCSS function needs previously set state
+        var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
 
-      var targetLeft = getTrackLeft(assign({
-        slideIndex: this.state.currentSlide,
-        trackRef: this.track
-      }, props, this.state));
-      // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
-
-      this.setState({trackStyle: trackStyle});
+        this.setState({trackStyle: trackStyle});
+      }
     });
   },
   getWidth: function getWidth(elem) {
